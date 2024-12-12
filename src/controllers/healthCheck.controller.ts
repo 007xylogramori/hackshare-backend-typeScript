@@ -8,6 +8,7 @@ import {
   checkDatabaseConnection,
   checkThirdPartyService
 } from "../utils/SystemCheck";
+import { config } from "../utils/config";
 
 interface HealthCheck {
     uptime: number;
@@ -27,7 +28,7 @@ const healthcheck = asyncHandler(async (req :Request, res:Response) => {
     uptime: process.uptime(),
     message: "OK",
     timestamp: new Date(Date.now()),
-    environment: process.env.NODE_ENV || "development",
+    environment: config.env || "development",
     version: process.version,
     memoryUsage: getMemoryUsage(),
     cpuUsage: getCpuUsage(),

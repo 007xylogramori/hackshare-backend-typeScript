@@ -2,6 +2,7 @@ import mongoose, { Schema, Model, model } from "mongoose";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt";
 import { IUser } from "../types/user.type";
+import { config } from "../utils/config";
 
 
 const userSchema: Schema<IUser> = new Schema(
@@ -78,7 +79,7 @@ userSchema.methods.generateAccessToken = function (): string {
       username: this.username,
       fullName: this.fullName,
     },
-    process.env.ACCESS_TOKEN_SECRET as string
+    config.accessToken as string
   );
 };
 
@@ -87,7 +88,7 @@ userSchema.methods.generateRefreshToken = function (): string {
     {
       _id: this._id,
     },
-    process.env.REFRESH_TOKEN_SECRET as string
+    config.refreshToken as string
   );
 };
 

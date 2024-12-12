@@ -10,6 +10,7 @@ import {
 } from "../utils/cloudinary";
 import { ApiResponse } from "../utils/ApiResponse";
 import { IUser } from "../types/user.type";
+import { config } from "../utils/config";
 
 const generateAccessAndRefreshTokens = async (
   userId: string
@@ -172,7 +173,7 @@ const refreshAccessToken = asyncHandler(async (req: Request, res: Response) => {
   try {
     const decodedToken = jwt.verify(
       incomingRefreshToken,
-      process.env.REFRESH_TOKEN_SECRET as string
+      config.refreshToken as string
     ) as { _id: string };
 
     const user = await User.findById(decodedToken._id);
