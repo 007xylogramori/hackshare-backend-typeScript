@@ -175,8 +175,7 @@ const deleteTeam = asyncHandler(async (req: Request, res: Response) => {
         new ApiResponse(200, { updateResult }, "Team deleted successfully")
       );
   } catch (error) {
-    console.error("Error deleting team:", error);
-    throw new ApiError(500, "Something went wrong while deleting the team");
+    throw new ApiError(500, (error as Error)?.message || "Something went wrong while deleting the team");
   }
 });
 
