@@ -43,7 +43,7 @@ import resourceRouter from "./routes/resource.routes";
 import postRouter from "./routes/post.routes";
 import githubApiRouter from "./routes/githubapi.routes";
 import genAIRouter from './routes/genAI.routes'
-// import communityRouter from './routes/communityPost.routes'
+import communityRouter from './routes/communityPost.routes'
 // import contactRouter from './routes/contact.routes'
 
 app.use("/api/v1/healthcheck", healthcheckRouter);
@@ -53,7 +53,7 @@ app.use("/api/v1/resources", resourceRouter);
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/github", githubApiRouter);
 app.use('/api/v1/genAI', genAIRouter);
-// app.use('/api/v1/community', communityRouter);
+app.use('/api/v1/community', communityRouter);
 // app.use('/api/v1/contact', contactRouter);
 
 export { app };
