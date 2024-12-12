@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/index.ts"
+    "dev": "nodemon ./server.ts",
+    "build":"tsc",
+    "docker:publish": "docker build -t himanshu053/hackshare-backend:v1 --platform linux/amd64 . && docker push himanshu053/hackshare-backend:v1"
   },
   "author": "Himanshu",
   "license": "ISC",
