@@ -36,7 +36,7 @@ app.use(
 
 import userRouter from './routes/user.routes'
 import healthcheckRouter from "./routes/healthcheck.routes"
-// import teamRouter from './routes/team.routes'
+import teamRouter from './routes/team.routes'
 // import resourceRouter from './routes/resource.routes'
 // import postRouter from './routes/post.routes'
 // import githubApiRouter from './routes/githubapi.routes'
@@ -46,7 +46,7 @@ import healthcheckRouter from "./routes/healthcheck.routes"
 
 app.use("/api/v1/healthcheck", healthcheckRouter)
 app.use("/api/v1/users", userRouter)
-// app.use("/api/v1/teams", teamRouter)
+app.use("/api/v1/teams", teamRouter)
 // app.use('/api/v1/resources', resourceRouter);
 // app.use('/api/v1/posts', postRouter);
 // app.use('/api/v1/github', githubApiRouter);
