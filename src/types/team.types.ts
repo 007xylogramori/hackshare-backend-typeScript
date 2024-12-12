@@ -1,4 +1,5 @@
 import  { Document,Types } from "mongoose";
+import { IUser } from "./user.type";
 interface GithubRepo {
   name: string;
   url: string;
@@ -13,7 +14,7 @@ interface TeamMember {
 export interface ITeam extends Document {
   name: string;
   code: string;
-  owner: Types.ObjectId;
+  owner: IUser;
   members: TeamMember[];
   githubRepos: GithubRepo[];
 }
