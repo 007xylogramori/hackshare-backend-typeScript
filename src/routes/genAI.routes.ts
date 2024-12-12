@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { generateResponse } from "../controllers/genAi.controllers";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middleware";
 
 const router = Router();
 
