@@ -15,11 +15,13 @@ import {
 } from "../controllers/user.controller";
 import { verifyJWT } from "../middlewares/auth.middleware";
 import { upload } from "../middlewares/multer.middleware";
+import { authLimiter } from "../utils/RateLimit";
+
 
 const router = Router();
 
-router.route("/register").post(registerUser);
-router.route("/login").post(loginUser);
+router.route("/register").post(authLimiter,registerUser);
+router.route("/login").post(authLimiter,loginUser);
 
 //secured routes
 router.route("/logout").get(verifyJWT, logoutUser);
@@ -27,9 +29,9 @@ router.route("/refresh-token").post(refreshAccessToken);
 router.route("/change-password").post(verifyJWT, changeCurrentPassword);
 router.route("/current-user").get(verifyJWT, getCurrentUser);
 router.route("/update-account").patch(verifyJWT, updateAccountDetails)
-router.route("/upload-profile-picture").post(verifyJWT, upload.single('profilePicture'), uploadProfilePicture);
+router.route("/upload-profile-picture").post(authLimiter,verifyJWT, upload.single('profilePicture'), uploadProfilePicture);
 router.route("/delete-profile-picture").delete(verifyJWT, deleteProfilePicture);
-router.route("/upload-cover-picture").post(verifyJWT, upload.single('coverPicture'), uploadCoverPicture);
+router.route("/upload-cover-picture").post(authLimiter,verifyJWT, upload.single('coverPicture'), uploadCoverPicture);
 router.route("/delete-cover-picture").delete(verifyJWT, deleteCoverPicture);
 router.route("/socials").post(verifyJWT,updateSocials);
 

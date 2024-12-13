@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import logger from "./utils/logger";
 import morgan from "morgan";
 import { config } from "./utils/config";
+import { globalLimiter } from "./utils/RateLimit";
+
 const morganFormat = ":method :url :status :response-time ms";
 const app = express();
 
@@ -13,6 +15,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(globalLimiter);
 app.use(morgan("dev"));
 app.use(express.json({ limit: "16kb" }) as RequestHandler);
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
@@ -42,9 +45,9 @@ import teamRouter from "./routes/team.routes";
 import resourceRouter from "./routes/resource.routes";
 import postRouter from "./routes/post.routes";
 import githubApiRouter from "./routes/githubapi.routes";
-import genAIRouter from './routes/genAI.routes'
-import communityRouter from './routes/communityPost.routes'
-// import contactRouter from './routes/contact.routes'
+import genAIRouter from "./routes/genAI.routes";
+import communityRouter from "./routes/communityPost.routes";
+import contactRouter from "./routes/contact.routes";
 
 app.use("/api/v1/healthcheck", healthcheckRouter);
 app.use("/api/v1/users", userRouter);
@@ -52,8 +55,8 @@ app.use("/api/v1/teams", teamRouter);
 app.use("/api/v1/resources", resourceRouter);
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/github", githubApiRouter);
-app.use('/api/v1/genAI', genAIRouter);
-app.use('/api/v1/community', communityRouter);
-// app.use('/api/v1/contact', contactRouter);
+app.use("/api/v1/genAI", genAIRouter);
+app.use("/api/v1/community", communityRouter);
+app.use("/api/v1/contact", contactRouter);
 
 export { app };
